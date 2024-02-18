@@ -1,14 +1,18 @@
 import React, { useState } from "react";
-import * as RadioGroup from "@radix-ui/react-radio-group";
+import { token } from "../../styled-system/tokens";
+import { css } from "../../styled-system/css";
+import { styled } from "../../styled-system/jsx";
+
 import {
   Shape,
   Parameters,
   BoxOption,
   Circle,
-  Text,
-  BoxTextOption,
-  ContentExemple,
+  ContentExample,
+  RadioGroupItem,
+  RadioGroupRoot,
   Divider,
+  Letter,
 } from "./styles";
 
 const backgrounds = ["grey", "beige", "green", "black"];
@@ -19,21 +23,23 @@ const SwitchPlayground = () => {
   const [size, setSize] = useState("medium");
   const [background, setBackground] = useState("black");
   const [fontFamily, setFontFamily] = useState("Inter");
-
   const isDark = background === "black" || background === "green";
+
   return (
     <Shape size={size} background={background} textColor={background}>
-      <ContentExemple fontFamily={fontFamily}>
+      <ContentExample fontFamily={fontFamily}>
         <h1>Customization</h1>
         <p>Create a look and feel that suits your personal preferences.</p>
-      </ContentExemple>
+      </ContentExample>
 
       <Parameters background={background}>
         <div>
-          <RadioGroup.Root
+          <RadioGroupRoot
             defaultValue="size"
             aria-label="Font size selector"
-            style={{ display: "flex", gap: "1.3rem", padding: "1rem" }}
+            display="flex"
+            gap="1.3rem"
+            padding="1rem"
           >
             {fontSizes.map((fontSize, idx) => {
               return (
@@ -48,14 +54,16 @@ const SwitchPlayground = () => {
                 />
               );
             })}
-          </RadioGroup.Root>
+          </RadioGroupRoot>
         </div>
         <Divider theme={isDark ? "white" : "black"} />
         <div>
-          <RadioGroup.Root
+          <RadioGroupRoot
             defaultValue="color"
             aria-label="Color selector"
-            style={{ display: "flex", gap: "1.3rem", padding: "1rem" }}
+            display="flex"
+            gap="1.3rem"
+            padding="1rem"
           >
             {backgrounds.map((light, idx) => {
               return (
@@ -69,14 +77,16 @@ const SwitchPlayground = () => {
                 />
               );
             })}
-          </RadioGroup.Root>
+          </RadioGroupRoot>
         </div>
         <Divider theme={isDark ? "white" : "black"} />
-        <div style={{ display: "flex", padding: "0.5rem" }}>
-          <RadioGroup.Root
+        <styled.div display="flex" padding="0.5rem">
+          <RadioGroupRoot
             defaultValue="text"
             aria-label="Text selector"
-            style={{ display: "flex", gap: "0.7rem", padding: "1rem 0" }}
+            display="flex"
+            gap="0.7rem"
+            padding="1rem 0"
           >
             {fonts.map((font, idx) => {
               return (
@@ -91,8 +101,8 @@ const SwitchPlayground = () => {
                 />
               );
             })}
-          </RadioGroup.Root>
-        </div>
+          </RadioGroupRoot>
+        </styled.div>
       </Parameters>
     </Shape>
   );
@@ -108,29 +118,20 @@ const Option = ({
   letter,
 }) => {
   return (
-    <BoxOption
-      background={background}
-      css={{
-        "& span": {
-          opacity: isSelected ? 1 : 0.3,
-        },
-        "&:hover span": {
-          opacity: 1,
-        },
-      }}
-      onClick={onClick}
-    >
-      <span className={`font-${size}`}>{letter}</span>
+    <BoxOption background={background} onClick={onClick}>
+      {letter && (
+        <Letter
+          opacity={isSelected ? "1" : "0.3"}
+          _hover={{ opacity: 1 }}
+          size={size}
+        >
+          {letter}
+        </Letter>
+      )}
       {isSelected && (
         <Circle
           layoutId={id}
           border={isDark ? "white" : "dark"}
-          style={{
-            textAlign: "center",
-            borderRadius: "50%",
-            left: -8,
-            right: -8,
-          }}
           initial={false}
           transition={{
             duration: 0.6,
@@ -142,49 +143,44 @@ const Option = ({
   );
 };
 
-const TextOption = ({ isSelected, id, background, onClick, isDark, value }) => {
+const TextOption = ({ isSelected, id, onClick, isDark, value }) => {
   return (
-    <BoxTextOption
+    <RadioGroupItem
+      margin="0"
+      position="relative"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      cursor="pointer"
+      padding="4px 16px"
       style={{
-        margin: 0,
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        cursor: "pointer",
-        padding: "4px 16px",
-        borderRadius: 24,
-      }}
-      css={{
-        "& span": {
-          opacity: isSelected ? 1 : 0.3,
-          fontFamily: `${value}, sans-serif`,
-        },
-        "&:hover span": {
-          opacity: 1,
-        },
+        // The token() function is generated by Panda and contains an object of all tokens by dot-path,
+        // allowing you to query for token's raw value at runtime.
+        // see: https://panda-css.com/docs/guides/dynamic-styling#using-token
+        "--font-family": token(`fonts.${value}`),
       }}
       onClick={onClick}
     >
-      <Text>{value}</Text>
+      <styled.span
+        opacity={isSelected ? "1" : "0.3"}
+        fontFamily="var(--font-family)"
+        _hover={{ opacity: 1 }}
+      >
+        {value}
+      </styled.span>
       {isSelected && (
         <Circle
           layoutId={id}
-          style={{
-            borderRadius: 24,
-            left: -0,
-            right: -0,
-          }}
-          background={background}
-          border={isDark ? "white" : "dark"}
           initial={false}
+          border={isDark ? "white" : "dark"}
+          radius="small"
           transition={{
             duration: 0.6,
             type: "spring",
           }}
         />
       )}
-    </BoxTextOption>
+    </RadioGroupItem>
   );
 };
 

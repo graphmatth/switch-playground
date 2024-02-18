@@ -1,11 +1,17 @@
+## Switch Playground
+
+A reproduction of the [Journal App](https://www.journal.do/) appearance section using Radix UI, Framer Motion and Panda CSS.
+
 ## Getting Started
 
-Run the development server:
+### Install
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm i
+```
+
+### Run the development server:
+
+```bash
 pnpm dev
 ```

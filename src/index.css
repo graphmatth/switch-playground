@@ -1,75 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@layer reset, base, tokens, recipes, utilities;
+
 @font-face {
-  font-family: "novela";
-  src: url("/fonts/novela-regular-webfont.eot");
-  src: url("/fonts/novela-regular-webfont.eot?#iefix")
-      format("embedded-opentype"),
-    url("/fonts/novela-regular-webfont.woff2") format("woff2"),
-    url("/fonts/novela-regular-webfont.woff") format("woff"),
-    url("/fonts/novela-regular-webfont.ttf") format("truetype");
-  font-weight: normal;
+  font-family: "Inter";
   font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Inter-Regular.woff2") format("woff2");
 }
 
-
-
-/*
-  Josh's Custom CSS Reset
-  https://www.joshwcomeau.com/css/custom-css-reset/
-*/
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-* {
-  margin: 0;
-}
-html,
-body {
-  height: 100%;
-}
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  font-family: sans-serif;
-}
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
-#root,
-#__next {
-  isolation: isolate;
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
-button {
-  appearance: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-align: left;
+@font-face {
+  font-family: "Novela";
+  src: url("/fonts/novela-regular-webfont.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-button:focus {
-  outline: none;
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+  }
+
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button {
+    font: inherit;
+  }
+  #root {
+    isolation: isolate;
+  }
+
+  button:focus {
+    outline: none;
+  }
 }

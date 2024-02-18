@@ -1,30 +1,34 @@
-import { styled } from "../../stitches.config";
 import { motion } from "framer-motion";
 import * as RadioGroup from "@radix-ui/react-radio-group";
+import { styled } from "../../styled-system/jsx";
 
-const ContentExemple = styled("div", {
-  fontFamily: "inter, sans-serif",
-  minHeight: 160,
+const RadioGroupItem = styled(RadioGroup.Item);
+const RadioGroupRoot = styled(RadioGroup.Root);
+
+const ContentExample = styled("div", {
+  base: {
+    fontFamily: "Inter, sans-serif",
+    minHeight: 160,
+  },
   variants: {
     fontFamily: {
       Novela: {
-        fontFamily: "novela, serif",
+        fontFamily: "Novela, serif",
       },
       Inter: {
-        fontFamily: "inter, sans-serif",
+        fontFamily: "Inter, sans-serif",
       },
     },
   },
 });
 
 const Divider = styled("div", {
-  display: "none",
-  height: 35,
-  width: 1,
-  opacity: 0.1,
-  margin: "0 4px",
-  "@bp1": {
-    display: "block",
+  base: {
+    display: { base: "none", bp1: "block" },
+    height: "35px",
+    width: "1px",
+    opacity: "0.1",
+    margin: "0 4px",
   },
   variants: {
     theme: {
@@ -39,20 +43,17 @@ const Divider = styled("div", {
 });
 
 const BoxOption = styled(RadioGroup.Item, {
-  backgroundColor: "inherit",
-  margin: 0,
-  height: 30,
-  width: 30,
-  position: "relative",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  cursor: "pointer",
-  borderRadius: "50%",
-  textAlign: "center",
-
-  defaultVariants: {
-    backgroud: "black",
+  base: {
+    margin: 0,
+    height: 30,
+    width: 30,
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    borderRadius: "50%",
+    textAlign: "center",
   },
   variants: {
     background: {
@@ -73,51 +74,45 @@ const BoxOption = styled(RadioGroup.Item, {
 });
 
 const Shape = styled(motion.div, {
-  width: "auto",
-  borderRadius: "24px",
-  backgroundColor: "#dfdfdf",
-  textAlign: "left",
-  padding: "16px 24px 24px",
-  minHeight: 248,
-  margin: 12,
-
-  ".font-small": {
-    fontSize: "16px",
-  },
-  ".font-medium": {
-    fontSize: "20px",
-  },
-  ".font-large": {
-    fontSize: "24px",
-  },
-  h1: {
-    fontWeight: "700",
-  },
-
-  "@bp1": {
-    padding: "102px 24px 144px",
-    textAlign: "center",
-    margin: 32,
+  base: {
+    width: "auto",
+    borderRadius: "24px",
+    backgroundColor: "#dfdfdf",
+    textAlign: { base: "left", bp1: "center" },
+    padding: { base: "16px 24px 24px", bp1: "102px 24px 144px" },
+    minHeight: 248,
+    margin: { base: "12px", bp1: "32px" },
+    "& h1": {
+      fontWeight: "700",
+    },
   },
 
   variants: {
+    fontFamily: {
+      novela: {
+        fontFamily: "Novela, serif",
+      },
+      Inter: {
+        fontFamily: "inter, sans-serif",
+      },
+    },
     size: {
       small: {
-        h1: {
+        "& h1": {
           fontSize: "32px",
         },
         wordSpacing: "1px",
         fontSize: "16px",
       },
       medium: {
-        h1: {
+        "& h1": {
           fontSize: "36px",
         },
         wordSpacing: "1px",
         fontSize: "20px",
       },
       large: {
-        h1: {
+        "& h1": {
           fontSize: "42px",
         },
         wordSpacing: "2px",
@@ -141,42 +136,43 @@ const Shape = styled(motion.div, {
     textColor: {
       grey: {
         color: "#3A3A3A",
-        span: {
+        "& span": {
           color: "#3A3A3A",
         },
       },
       beige: {
         color: "#3C3429",
-        span: {
+        "& span": {
           color: "#3C3429",
         },
       },
       green: {
         color: "#E0EBD2",
-        span: {
+        "& span": {
           color: "#E0EBD2",
         },
       },
       black: {
         color: "#E3E3E3",
-        span: {
+        "& span": {
           color: "#E3E3E3",
         },
       },
     },
   },
-  defaultVariants: {
-    backgroud: "black",
-    size: "medium",
-    textColor: "white",
-  },
 });
 
 const Circle = styled(motion.div, {
-  border: "1px solid #fff",
-  position: "absolute",
-  top: -8,
-  bottom: -8,
+  base: {
+    border: "1px solid #fff",
+    position: "absolute",
+    top: "-8px",
+    bottom: "-8px",
+    right: "-8px",
+    left: "-8px",
+    textAlign: "center",
+    borderRadius: "50%",
+  },
   variants: {
     border: {
       white: {
@@ -186,35 +182,29 @@ const Circle = styled(motion.div, {
         border: "1px solid #000",
       },
     },
+    radius: {
+      small: {
+        borderRadius: "24px",
+        left: "0px",
+        right: "0px",
+      },
+    },
   },
 });
 
-const Text = styled("span", {});
-
-const BoxTextOption = styled(RadioGroup.Item, {});
-
 const Parameters = styled("div", {
-  display: "flex",
-  flexDirection: "column",
-  margin: "0",
-  alignItems: "flex-start",
-  width: "100%",
-  justifyContent: "center",
-  borderRadius: "16px",
-  padding: "16px 0 8px",
-  fontSize: 12,
-  marginTop: 32,
-
-  "@bp1": {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    margin: "0px auto 24px",
-    padding: "4px 6px",
-    width: "fit-content",
-    borderRadius: "100px",
-    alignItems: "center",
+  base: {
+    display: "flex",
+    flexDirection: { base: "column", bp1: "row" },
+    margin: { base: "0", bp1: "0px auto 24px auto" },
+    alignItems: { base: "flex-start", bp1: "center" },
+    width: { base: "100%", bp1: "fit-content" },
+    borderRadius: { base: "16px", bp1: "100px" },
+    padding: { base: "16px 0 8px", bp1: "4px 6px" },
+    justifyContent: "center",
+    fontSize: "12px",
+    marginTop: "32px",
   },
-
   variants: {
     background: {
       black: {
@@ -234,13 +224,33 @@ const Parameters = styled("div", {
   },
 });
 
+const Letter = styled("span", {
+  base: {
+    fontSize: 20,
+  },
+  variants: {
+    size: {
+      small: {
+        fontSize: 16,
+      },
+      medium: {
+        fontSize: 20,
+      },
+      large: {
+        fontSize: 24,
+      },
+    },
+  },
+});
+
 export {
   BoxOption,
   Shape,
   Circle,
-  Text,
-  BoxTextOption,
   Divider,
   Parameters,
-  ContentExemple,
+  ContentExample,
+  Letter,
+  RadioGroupItem,
+  RadioGroupRoot,
 };
