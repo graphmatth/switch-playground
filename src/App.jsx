@@ -1,21 +1,18 @@
 import SwitchPlayground from "./components/SwitchPlayground";
+import { styled } from "../styled-system/jsx";
 
 function App() {
   return (
-    <div className="App">
-      <div
-        style={{
-          maxWidth: 1440,
-          margin: "0 auto",
-          textAlign: "center",
-          minHeight: "100vh",
-          display: "grid",
-          alignItems: "center",
-        }}
-      >
-        <SwitchPlayground />
-      </div>
-    </div>
+    <styled.main
+      maxWidth="1440px"
+      margin="0 auto"
+      textAlign="center"
+      minHeight="100vh"
+      display="grid"
+      alignItems="center"
+    >
+      <SwitchPlayground />
+    </styled.main>
   );
 }
 

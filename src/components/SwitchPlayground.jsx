@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { token } from "../../styled-system/tokens";
-import { css } from "../../styled-system/css";
 import { styled } from "../../styled-system/jsx";
 
 import {
